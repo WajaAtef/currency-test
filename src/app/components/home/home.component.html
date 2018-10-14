@@ -1,3 +1,49 @@
-<p>
-  home works!
-</p>
+<div style="text-align:center">
+  <h1 style="text-align: center">
+    Available currencies
+  </h1>
+
+  <mat-divider class="mb mt"></mat-divider>
+
+  <div>
+
+    <mat-form-field>
+      <input matInput placeholder="Search " >
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-select
+        placeholder="Filter By" >
+        <mat-option>
+
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <mat-grid-list #grid cols="6" [ngStyle]="{'display': loading ? 'none' : '' }">
+
+    <mat-grid-tile  >
+
+
+      <div class="index-content" >
+        <div class="container">
+          <div class="card" >
+            <span>Id      : </b>  </span><br>
+            <span>Type    :</b>  </span><br>
+            <span>Symbol  : </b> </span>
+          </div>
+        </div>
+      </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+  <!-- Pagination -->
+
+
+
+
+
+</div>

@@ -3,21 +3,24 @@ import {NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
-import {HomeComponent} from './components/home/home.component';
-import { CurrencyDetailsComponent } from './components/currency-details/currency-details.component';
+import {RouterModule, Routes} from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '',
+    loadChildren: './currencies/currencies.module#CurrenciesModule',
+  }
+];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    CurrencyDetailsComponent
+    AppComponent
   ],
-
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
