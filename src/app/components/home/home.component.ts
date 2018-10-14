@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Currency} from '../../models/currency.model';
 import {QueryParams} from '../../models/query-params.model';
-import {ObservableMedia} from '@angular/flex-layout';
+import {MediaChange, ObservableMedia} from '@angular/flex-layout';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {CurrenciesService} from '../../services/currencies.service';
+import {MatPaginator} from '@angular/material/typings/paginator';
+import {MatGridList} from '@angular/material/typings/grid-list';
+import {SearchService} from '../../services/search.service';
 
 @Component({
   selector: 'app-home',
@@ -34,12 +37,15 @@ export class HomeComponent implements OnInit {
     {value: 'name', viewValue: 'Name'},
     {value: 'type', viewValue: 'Type'}
   ];
+
   constructor(private currenciesService: CurrenciesService, private snackbar: MatSnackBar, private router: Router,
-              private observableMedia: ObservableMedia, private searchService: SearchService) { }
+              private observableMedia: ObservableMedia, private searchService: SearchService) {
+  }
 
   ngOnInit() {
     this.initQueryParams();
   }
+
   public showDetails(id: string) {
     this.searchService.params = this.queryParams;
     this.router.navigate(['/currency/' + id]);
@@ -53,8 +59,7 @@ export class HomeComponent implements OnInit {
 
   private initQueryParams() {
 
-    if(this.searchService.params === undefined)
-    {
+    if (this.searchService.params === undefined) {
       this.queryParams = new QueryParams();
       this.queryParams.pageIndex = 1;
       this.queryParams.pageSize = 10;
@@ -79,10 +84,12 @@ export class HomeComponent implements OnInit {
       this.initCurrencies();
     }
   }
+
   keyChanged(value) {
     this.queryParams.filterValue = value;
     this.initCurrencies();
   }
+
   pageChanged() {
     this.queryParams.pageIndex = this.paginator.pageIndex + 1;
     this.queryParams.pageSize = this.paginator.pageSize;
