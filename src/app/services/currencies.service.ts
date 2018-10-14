@@ -25,7 +25,6 @@ export class CurrenciesService {
 
     return this.http.get(environment.apiUrl + '/' + id, options)
       .pipe(map((response: any) => {
-
           const currency = new Currency(response.data);
 
           return currency;
