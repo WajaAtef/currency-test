@@ -8,14 +8,14 @@
   <div>
 
     <mat-form-field>
-      <input matInput placeholder="Search " >
+      <input matInput  placeholder="Search.." >
     </mat-form-field>
     <br>
     <mat-form-field>
       <mat-select
         placeholder="Filter By" >
-        <mat-option>
-
+        <mat-option   [value]="item.viewValue">
+          {{ item.value }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -24,15 +24,15 @@
 
   <mat-grid-list #grid cols="6" [ngStyle]="{'display': loading ? 'none' : '' }">
 
-    <mat-grid-tile  >
+    <mat-grid-tile>
 
 
       <div class="index-content" >
         <div class="container">
-          <div class="card" >
-            <span>Id      : </b>  </span><br>
-            <span>Type    :</b>  </span><br>
-            <span>Symbol  : </b> </span>
+          <div class="card" (click)="showDetails(currencieItem.id)">
+            <span ><b>Id      : </b> {{currencieItem.id}} </span><br>
+            <span> <b>Type    :</b>  {{currencieItem.attributes.currencyType}}</span><br>
+            <span> <b>  Symbol  : </b> {{currencieItem.attributes.symbol}}</span>
           </div>
         </div>
       </div>
@@ -43,6 +43,14 @@
   <!-- Pagination -->
 
 
+  <mat-paginator [ngStyle]="{'display': loading ? 'none' : '' }"
+                 [length]="currenciesNumber"
+                 [pageSize]="10"
+                 [showFirstLastButtons]="true"
+                 [pageSizeOptions]="[10, 50, 100]"
+                 [pageIndex]="queryParams.pageIndex? queryParams.pageIndex - 1 : '1'"
+                 (page)="pageChanged()">
+  </mat-paginator>
 
 
 
