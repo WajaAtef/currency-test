@@ -4,11 +4,13 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {HomeComponent} from './components/home/home.component';
+import { CurrencyDetailsComponent } from './components/currency-details/currency-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CurrencyDetailsComponent
   ],
 
   imports: [
