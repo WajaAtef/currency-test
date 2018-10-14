@@ -5,6 +5,7 @@ import {Currency} from '../models/currency.model';
 import {map} from 'rxjs/operators';
 import {QueryParams} from '../models/query-params.model';
 import {CurrenciesPagination} from '../models/pagination.model';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class CurrenciesService {
   constructor(private http: HttpClient) {
   }
 
-  apiUrl: 'assets/json/currencies.json';
+  // apiUrl: 'assets/json/currencies.json';
 
   public findone(id: string): Observable<Currency> {
 
@@ -22,7 +23,7 @@ export class CurrenciesService {
       headers: this.getApiHeaders()
     };
 
-    return this.http.get(this.apiUrl, options)
+    return this.http.get(environment.apiUrl + '/' + id, options)
       .pipe(map((response: any) => {
 
           const currency = new Currency(response.data);
@@ -63,7 +64,7 @@ export class CurrenciesService {
       headers: this.getApiHeaders()
     };
 
-    return this.http.get(this.apiUrl, options)
+    return this.http.get(environment.apiUrl, options)
       .pipe(map((response: any) => {
 
           const currenciesPage = new CurrenciesPagination(response);
